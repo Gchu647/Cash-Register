@@ -16,7 +16,12 @@ h1 {
     width: 40%;
 }
 
-#screen {
+#calScreen {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
     margin: 5px;
     height: 100px;
     background-color: aquamarine; 
