@@ -1,0 +1,23 @@
+body{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+h1 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+#calBody {
+    width: 40%;
+}
+
+#screen {
+    margin: 5px;
+    height: 100px;
+    background-color: aquamarine; 
+}
