@@ -6,14 +6,19 @@
 
     // All number event listeners go here
     for (let i = 0; i < numberButton.length; i++) {
-        numberButton[i].addEventListener("click", function () { numOnScreen(i) });
-        numberButton[i].addEventListener("click", function () { tempMem(i) }); //Store temp
+        if (i < 10) {
+            numberButton[i].addEventListener("click", function () { numOnScreen(i) });
+            numberButton[i].addEventListener("click", function () { tempMem(i) });
+        } else {
+            numberButton[i].addEventListener("click", function () { numOnScreen(".") });
+            numberButton[i].addEventListener("click", function () { tempMem(".") });
+        }
     }
 
     // prints multiple number values on screen
     function numOnScreen(strNum) {
-        if ((calScreen.innerHTML === "0") || (clearNum === true)) {
-            calScreen.innerHTML = strNum;
+        if ((calScreen.innerHTML === "$ 0") || (clearNum === true)) {
+            calScreen.innerHTML = "$ " + strNum;
             clearNum = false;
         } else {
             calScreen.innerHTML += strNum;
@@ -53,7 +58,7 @@
         tempArr = [];
     }
 
-    // Operation buttons +, -, =
+    // All operator buttons
     operatorButton[0].addEventListener("click", function () { storeMem(false) });
     operatorButton[0].addEventListener("click", equal); //equal sign & button orders matter
     operatorButton[0].addEventListener("click", clearScreen);
@@ -66,9 +71,10 @@
     operatorButton[4].addEventListener("click", function () { storeMem("/") }); // divide button
     operatorButton[4].addEventListener("click", clearScreen);
 
-
+    //Equal function calls on all the other operators and module pattern
     function equal() {
         var finalResult = 0;
+        var testResult = 0;
         console.log(storeArr);
 
         if (storeArr[2] === "+") {
@@ -82,10 +88,15 @@
         }
 
         storeArr = [null, null, ""];
-        calScreen.innerHTML = finalResult;
+        calScreen.innerHTML = "$ " + finalResult.toFixed(2);
+
+        accountModule.load(finalResult);
+        accountModule.saveMemory();
+        testResult = accountModule.recallMemory();
+        console.log("This is memory: " + testResult);
+
     }
 
-    //This function will be called on by the equal function
     function add(arr) {
         var result = arr[0] + arr[1];
 
@@ -109,5 +120,30 @@
 
         return result;
     }
+
+    // Modulus to store the third memory-------------------------
+
+    var accountModule = (function () {
+        var memory = 0;
+        var total = 0;
+
+        var load = function (num) {
+            total = num;
+        }
+
+        var saveMemory = function () {
+            memory += total;
+        }
+
+        var recallMemory = function () {
+            return memory.toFixed(2);
+        }
+
+        return {
+            load: load,
+            saveMemory: saveMemory,
+            recallMemory: recallMemory
+        }
+    })();
 
 })();
