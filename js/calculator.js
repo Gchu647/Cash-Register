@@ -4,57 +4,75 @@
     var numberButton = document.getElementsByClassName("numbers");
     var operatorButton = document.getElementsByClassName("operators");
 
-    // need to add more number event listeners here
+    // All number event listeners go here
     for (let i = 0; i < numberButton.length; i++) {
         numberButton[i].addEventListener("click", function () { numOnScreen(i) });
-        numberButton[i].addEventListener("click", function () { storeMem(i) });
+        numberButton[i].addEventListener("click", function () { tempMem(i) }); //Store temp
     }
 
-    /* prints number value on screen
-    function numOnScreen(num) {
-        calScreen.innerHTML = num;
-    } */
-
-    //Upgraded version
-    //Store the longer numbers in a variable and make that variable equals the innerHTML at the end.
-    function testFunction(strNum) {
-        if (calScreen.innerHTML === "0") {
+    // prints multiple number values on screen
+    function numOnScreen(strNum) {
+        if ((calScreen.innerHTML === "0") || (clearNum === true)) {
             calScreen.innerHTML = strNum;
+            clearNum = false;
         } else {
             calScreen.innerHTML += strNum;
         }
     }
 
-    //Array that stores to numbers and a symbol, which will be evaluated by equal sign
+    // A function that clears the screen after operator button is pressed
+    var clearNum = false;
+    function clearScreen() {
+        clearNum = true;
+    }
+
+
+    //A temp array to store numbers, and another array to perform action on
+    var tempArr = [];
     var storeArr = [null, null, ""];
 
-    //store numbers and symbols, but I need it to store multiple rather than single numbers
-    function storeMem(val) {
+    function tempMem(num) {
+        tempArr.push(num);
+    }
+
+    // Puts the tempArr values in to storeArr
+    function storeMem(symbol) {
+        var val = parseFloat(tempArr.join(""));
+        console.log(val);
+
         if ((typeof val === "number") && (storeArr[0] === null)) {
             storeArr[0] = val;
         } else if ((typeof val === "number") && (storeArr[1] === null)) {
             storeArr[1] = val;
-        } else if (typeof val === "string") {
-            storeArr[2] = val;
         }
+
+        if (typeof val === "string") {
+            storeArr[2] = symbol;
+        }
+
+        tempArr = [];
     }
 
     // Add numbers and display it on screen
-    operatorButton[0].addEventListener("click", function () { storeMem("+") });
-    operatorButton[1].addEventListener("click", equal); //equal button
+    operatorButton[0].addEventListener("click", function () { storeMem("+") }); // add button
+    operatorButton[0].addEventListener("click", clearScreen);
+    operatorButton[1].addEventListener("click", function () { storeMem(false) });
+    operatorButton[1].addEventListener("click", equal); //equal sign & button orders matter
+    operatorButton[1].addEventListener("click", clearScreen);
 
-    var result; //private this later
+    // Mododule Pattern happens below here ------------------------
+
+    function equal() {
+        var finalResult = add(storeArr);
+        storeArr = [null, null, ""];
+        calScreen.innerHTML = finalResult;
+    }
 
     //This function will be called on by the equal function
     function add(arr) {
-        result = arr[0] + arr[1];
-    }
+        var result = arr[0] + arr[1];
 
-    function equal() {
-        console.log(storeArr);
-        //calScreen.innerHTML = result;
-        //If add function not called first, it returns NaN. A lot more if then statements are needed.
-        //This function will also be the one that calls new add function
+        return result;
     }
 
 })();
