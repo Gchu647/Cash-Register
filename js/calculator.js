@@ -46,24 +46,41 @@
             storeArr[1] = val;
         }
 
-        if (typeof val === "string") {
+        if (typeof symbol === "string") {
             storeArr[2] = symbol;
         }
 
         tempArr = [];
     }
 
-    // Add numbers and display it on screen
-    operatorButton[0].addEventListener("click", function () { storeMem("+") }); // add button
+    // Operation buttons +, -, =
+    operatorButton[0].addEventListener("click", function () { storeMem(false) });
+    operatorButton[0].addEventListener("click", equal); //equal sign & button orders matter
     operatorButton[0].addEventListener("click", clearScreen);
-    operatorButton[1].addEventListener("click", function () { storeMem(false) });
-    operatorButton[1].addEventListener("click", equal); //equal sign & button orders matter
+    operatorButton[1].addEventListener("click", function () { storeMem("+") }); // add button
     operatorButton[1].addEventListener("click", clearScreen);
+    operatorButton[2].addEventListener("click", function () { storeMem("-") }); // subtract button
+    operatorButton[2].addEventListener("click", clearScreen);
+    operatorButton[3].addEventListener("click", function () { storeMem("*") }); // multiply button
+    operatorButton[3].addEventListener("click", clearScreen);
+    operatorButton[4].addEventListener("click", function () { storeMem("/") }); // divide button
+    operatorButton[4].addEventListener("click", clearScreen);
 
-    // Mododule Pattern happens below here ------------------------
 
     function equal() {
-        var finalResult = add(storeArr);
+        var finalResult = 0;
+        console.log(storeArr);
+
+        if (storeArr[2] === "+") {
+            finalResult = add(storeArr);
+        } else if (storeArr[2] === "-") {
+            finalResult = subtract(storeArr);
+        } else if (storeArr[2] === "*") {
+            finalResult = multiply(storeArr);
+        } else if (storeArr[2] === "/") {
+            finalResult = divide(storeArr);
+        }
+
         storeArr = [null, null, ""];
         calScreen.innerHTML = finalResult;
     }
@@ -71,6 +88,24 @@
     //This function will be called on by the equal function
     function add(arr) {
         var result = arr[0] + arr[1];
+
+        return result;
+    }
+
+    function subtract(arr) {
+        var result = arr[0] - arr[1];
+
+        return result;
+    }
+
+    function multiply(arr) {
+        var result = arr[0] * arr[1];
+
+        return result;
+    }
+
+    function divide(arr) {
+        var result = arr[0] / arr[1];
 
         return result;
     }
