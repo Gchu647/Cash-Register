@@ -40,7 +40,7 @@
         tempArr.push(num);
     }
 
-    // Puts the tempArr values in to storeArr
+    // Storing operation results to memory
     function storeMem(symbol) {
         var val = parseFloat(tempArr.join(""));
         console.log(val);
@@ -90,7 +90,6 @@
         storeArr = [null, null, ""];
         calScreen.innerHTML = "$ " + finalResult.toFixed(2);
 
-        // This needs to be in a deposit functon.
         accountModule.load(finalResult);
     }
 
@@ -120,10 +119,17 @@
 
     // Deposit, widthdraw, and balance
     var accountButtons = document.getElementsByClassName("accounts"); //Move it up later
+    // accountButtons[0].addEventListener("click", testMem);
     accountButtons[0].addEventListener("click", depositCash);
     accountButtons[1].addEventListener("click", withdrawCash);
     accountButtons[2].addEventListener("click", balanceCash);
 
+    /* Storing single numbers to memory
+    function testMem() {
+        var val = parseFloat(tempArr.join(""));
+        accountModule.load(val);
+    }
+    */
 
     function depositCash() {
         accountModule.desposit();

@@ -2,7 +2,8 @@ body{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: lightseagreen;
 }
 
 h1 {
@@ -14,6 +15,8 @@ h1 {
 
 #calBody {
     width: 40%;
+    border: 1px solid lightseagreen;
+    padding: 5px;
 }
 
 #calScreen {
@@ -24,5 +27,24 @@ h1 {
     font-size: 30px;
     margin: 5px;
     height: 100px;
-    background-color: aquamarine; 
+    background-color: lightseagreen; 
+    color: whitesmoke;
+}
+
+#calButtons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+#numParent {
+    width: 30%;
+}
+
+#opParent {
+    width: 30%;
+}
+
+#accountParent {
+    width: 20%;
 }
