@@ -71,7 +71,7 @@
     operatorButton[4].addEventListener("click", function () { storeMem("/") }); // divide button
     operatorButton[4].addEventListener("click", clearScreen);
 
-    //Equal function calls on all the other operators and module pattern
+    //Equal function calls on all the other operator functions
     function equal() {
         var finalResult = 0;
         var testResult = 0;
@@ -90,11 +90,8 @@
         storeArr = [null, null, ""];
         calScreen.innerHTML = "$ " + finalResult.toFixed(2);
 
+        // This needs to be in a deposit functon.
         accountModule.load(finalResult);
-        accountModule.saveMemory();
-        testResult = accountModule.recallMemory();
-        console.log("This is memory: " + testResult);
-
     }
 
     function add(arr) {
@@ -121,7 +118,25 @@
         return result;
     }
 
-    // Modulus to store the third memory-------------------------
+    // Deposit, widthdraw, and balance
+    var accountButtons = document.getElementsByClassName("accounts"); //Move it up later
+    accountButtons[0].addEventListener("click", depositCash);
+    accountButtons[1].addEventListener("click", withdrawCash);
+    accountButtons[2].addEventListener("click", balanceCash);
+
+
+    function depositCash() {
+        accountModule.desposit();
+    }
+
+    function withdrawCash() {
+        accountModule.widthdraw();
+    }
+
+    function balanceCash() {
+        var cash = accountModule.balance();
+        calScreen.innerHTML = "Balance: $" + cash;
+    }
 
     var accountModule = (function () {
         var memory = 0;
@@ -131,18 +146,23 @@
             total = num;
         }
 
-        var saveMemory = function () {
+        var desposit = function () {
             memory += total;
         }
 
-        var recallMemory = function () {
+        var widthdraw = function () {
+            memory -= total;
+        }
+
+        var balance = function () {
             return memory.toFixed(2);
         }
 
         return {
             load: load,
-            saveMemory: saveMemory,
-            recallMemory: recallMemory
+            desposit: desposit,
+            widthdraw: widthdraw,
+            balance: balance
         }
     })();
 
