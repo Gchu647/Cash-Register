@@ -17,8 +17,8 @@
 
     // prints multiple number values on screen
     function numOnScreen(strNum) {
-        if ((calScreen.innerHTML === "$ 0") || (clearNum === true)) {
-            calScreen.innerHTML = "$ " + strNum;
+        if ((calScreen.innerHTML === "0") || (clearNum === true)) {
+            calScreen.innerHTML = strNum;
             clearNum = false;
         } else {
             calScreen.innerHTML += strNum;
@@ -74,7 +74,6 @@
     //Equal function calls on all the other operator functions
     function equal() {
         var finalResult = 0;
-        var testResult = 0;
         console.log(storeArr);
 
         if (storeArr[2] === "+") {
@@ -88,9 +87,9 @@
         }
 
         storeArr = [null, null, ""];
-        calScreen.innerHTML = "$ " + finalResult.toFixed(2);
+        calScreen.innerHTML = finalResult.toFixed(2);
 
-        accountModule.load(finalResult);
+        // accountModule.load(finalResult);
     }
 
     function add(arr) {
@@ -116,60 +115,5 @@
 
         return result;
     }
-
-    // Deposit, widthdraw, and balance
-    var accountButtons = document.getElementsByClassName("accounts"); //Move it up later
-    // accountButtons[0].addEventListener("click", testMem);
-    accountButtons[0].addEventListener("click", depositCash);
-    accountButtons[1].addEventListener("click", withdrawCash);
-    accountButtons[2].addEventListener("click", balanceCash);
-
-    /* Storing single numbers to memory
-    function testMem() {
-        var val = parseFloat(tempArr.join(""));
-        accountModule.load(val);
-    }
-    */
-
-    function depositCash() {
-        accountModule.desposit();
-    }
-
-    function withdrawCash() {
-        accountModule.widthdraw();
-    }
-
-    function balanceCash() {
-        var cash = accountModule.balance();
-        calScreen.innerHTML = "Balance: $" + cash;
-    }
-
-    var accountModule = (function () {
-        var memory = 0;
-        var total = 0;
-
-        var load = function (num) {
-            total = num;
-        }
-
-        var desposit = function () {
-            memory += total;
-        }
-
-        var widthdraw = function () {
-            memory -= total;
-        }
-
-        var balance = function () {
-            return memory.toFixed(2);
-        }
-
-        return {
-            load: load,
-            desposit: desposit,
-            widthdraw: widthdraw,
-            balance: balance
-        }
-    })();
 
 })();

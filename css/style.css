@@ -48,3 +48,16 @@ h1 {
 #accountParent {
     width: 20%;
 }
+
+.accounts:nth-child(1) {
+    background-color: salmon;
+    width: 90%;
+    height: 40px;
+    margin: 2px;
+}
+
+#note {
+    color: salmon;
+    margin-top: 20px;
+    font-size: 18px;
+}

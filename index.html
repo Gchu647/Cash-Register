@@ -12,7 +12,7 @@
 <body>
     <h1>Cash Register</h1>
     <div id="calBody">
-        <div id="calScreen">$ 0</div>
+        <div id="calScreen">0</div>
         <div id="calButtons">
             <div id="numParent">
                 <input type="button" class="numbers" value="0">
@@ -35,14 +35,17 @@
                 <input type="button" class="operators" value="/">
             </div>
             <div id="accountParent">
+                <input type="button" class="accounts" value="AC">
+                <input type="button" class="accounts" value="BAL">
                 <input type="button" class="accounts" value="D/$">
                 <input type="button" class="accounts" value="W/$">
-                <input type="button" class="accounts" value="BAL">
             </div>
         </div>
+        <div id="note">Do not press AC while doing calculatons</div>
     </div>
 
     <script src="js/calculator.js"></script>
+    <script src="js/cash_register.js"></script>
 </body>
 
 </html>
