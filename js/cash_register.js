@@ -25,8 +25,18 @@
         calScreen.innerHTML = "Balance: $" + cash;
     }
 
+    // This function either clears the screen or sends in the gif
     function clearScreen() {
-        calScreen.innerHTML = 0;
+        if (bomb.innerHTML === "X") {
+            calScreen.innerHTML = 0;
+            bomb.innerHTML = "Y";
+            calScreen.style.height = "100px";
+            calScreen.style.backgroundImage = "none";
+        } else {
+            calScreen.innerHTML = "";
+            calScreen.style.height = "350px";
+            calScreen.style.backgroundImage = "url('https://i.imgflip.com/1jflli.jpg')";
+        }
     }
 
     // This module keeps tracks of the memory in the balance

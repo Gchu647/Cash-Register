@@ -89,7 +89,7 @@
         storeArr = [null, null, ""];
         calScreen.innerHTML = finalResult.toFixed(2);
 
-        // accountModule.load(finalResult);
+        bomb.innerHTML = "X";
     }
 
     function add(arr) {
